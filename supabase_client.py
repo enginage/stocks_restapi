@@ -27,10 +27,22 @@ async def get_supabase_client() -> Client:
             os.getenv("SUPABASE_SERVICE_ROLE_KEY", "").strip()
             or os.getenv("SUPABASE_ANON_KEY", "").strip()
         )
+        if url.lower().startswith("postgres"):
+            raise HTTPException(
+                status_code=500,
+                detail=(
+                    "SUPABASE_URL must be the HTTPS Project URL (e.g. https://xxx.supabase.co), "
+                    "not a postgresql:// connection string. See Supabase Dashboard → Settings → API."
+                ),
+            )
         if not url or not key:
             raise HTTPException(
                 status_code=500,
-                detail="Supabase config missing: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_ANON_KEY)",
+                detail=(
+                    "Supabase config missing: set SUPABASE_URL (https://…supabase.co) and "
+                    "SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_ANON_KEY). "
+                    "For local dev, ensure .env exists in RestAPI root and run after `load_dotenv`."
+                ),
             )
 
         # create_client 는 동기 — 초기 1회만 실행

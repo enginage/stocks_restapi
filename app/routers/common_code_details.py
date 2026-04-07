@@ -9,7 +9,7 @@ from supabase_client import get_supabase_client, schema_basic
 router = APIRouter()
 
 
-@router.get("/", response_model=List[CommonCodeDetailOut])
+@router.get("", response_model=List[CommonCodeDetailOut])
 async def read_common_code_details(
     master_id: Optional[int] = None,
     skip: int = Query(0, ge=0),

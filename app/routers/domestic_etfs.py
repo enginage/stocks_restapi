@@ -9,7 +9,7 @@ from supabase_client import get_supabase_client, schema_stock
 router = APIRouter()
 
 
-@router.get("/", response_model=List[DomesticETFsOut])
+@router.get("", response_model=List[DomesticETFsOut])
 async def read_domestic_etfs(
     skip: int = Query(0, ge=0),
     limit: int = Query(1000, ge=1, le=10000),

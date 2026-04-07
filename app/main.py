@@ -1,4 +1,12 @@
 import os
+from pathlib import Path
+
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv(Path(__file__).resolve().parent.parent / ".env")
+except ImportError:
+    pass
 
 from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -15,6 +23,7 @@ app = FastAPI(
     title="Stocks Rest API",
     description="국내 ETF·공통코드·일봉·배당 REST API (Supabase, Vercel)",
     version="1.0.0",
+    redirect_slashes=False,
 )
 
 _origins = os.getenv("ALLOWED_ORIGINS", "").strip()
