@@ -14,6 +14,7 @@ async def read_domestic_etfs(
     skip: int = Query(0, ge=0),
     limit: int = Query(1000, ge=1, le=10000),
     etf_type: Optional[str] = None,
+    etf_tax_type: Optional[str] = None,
     client: Client = Depends(get_supabase_client),
 ):
     q = (
@@ -23,6 +24,8 @@ async def read_domestic_etfs(
     )
     if etf_type:
         q = q.eq("etf_type", etf_type)
+    if etf_tax_type:
+        q = q.eq("etf_tax_type", etf_tax_type)
     q = q.order("id").range(skip, skip + limit - 1)
     res = q.execute()
     rows = res.data or []
