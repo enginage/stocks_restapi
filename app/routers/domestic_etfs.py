@@ -21,7 +21,9 @@ async def read_domestic_etfs(
         client.schema(schema_stock())
         .table("domestic_etfs")
         .select(
-            "id,ticker,name,etf_type,etf_tax_type,base_index,asset_manager,compensation,latest_close,latest_volume"
+            "id,ticker,name,etf_type,etf_tax_type,base_index,asset_manager,compensation,"
+            "latest_close,latest_volume,rsi18,rsi30,obv,macd_12_26,macd_signal_9,macd_histogram,"
+            "bb_width,bb_percent_b"
         )
     )
     if etf_type:
@@ -43,7 +45,9 @@ async def read_domestic_etf(
         client.schema(schema_stock())
         .table("domestic_etfs")
         .select(
-            "id,ticker,name,etf_type,etf_tax_type,base_index,asset_manager,compensation,latest_close,latest_volume"
+            "id,ticker,name,etf_type,etf_tax_type,base_index,asset_manager,compensation,"
+            "latest_close,latest_volume,rsi18,rsi30,obv,macd_12_26,macd_signal_9,macd_histogram,"
+            "bb_width,bb_percent_b"
         )
         .eq("id", etf_id)
         .limit(1)

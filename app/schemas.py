@@ -18,6 +18,14 @@ class DomesticETFsOut(BaseModel):
     compensation: Optional[Decimal] = None
     latest_close: Optional[int] = None
     latest_volume: Optional[int] = None
+    rsi18: Optional[float] = None
+    rsi30: Optional[float] = None
+    obv: Optional[float] = None
+    macd_12_26: Optional[float] = None
+    macd_signal_9: Optional[float] = None
+    macd_histogram: Optional[float] = None
+    bb_width: Optional[float] = None
+    bb_percent_b: Optional[float] = None
 
 
 class CommonCodeMasterOut(BaseModel):
