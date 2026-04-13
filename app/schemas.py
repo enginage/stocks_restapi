@@ -1,4 +1,5 @@
 from datetime import date
+from decimal import Decimal
 from typing import Optional
 
 from pydantic import BaseModel, ConfigDict
@@ -12,6 +13,11 @@ class DomesticETFsOut(BaseModel):
     name: str
     etf_type: Optional[str] = None
     etf_tax_type: Optional[str] = None
+    base_index: Optional[str] = None
+    asset_manager: Optional[str] = None
+    compensation: Optional[Decimal] = None
+    latest_close: Optional[int] = None
+    latest_volume: Optional[int] = None
 
 
 class CommonCodeMasterOut(BaseModel):
